@@ -1,0 +1,33 @@
+min_version = "2024.9.5"
+
+[env]
+_.python.venv = { path = ".venv", create = true }
+
+[tools]
+python = "3.12"
+ruff = "latest"
+uv = "latest"
+
+[tasks.install]
+description = "Install dependencies"
+alias = "i"
+run = "uv pip install -r requirements.txt"
+
+[tasks.run3]
+description = "Run the 3 application"
+alias = "3"
+run = "python 3/main.py"
+
+[tasks.run4]
+description = "Run the 4 application"
+alias = "4"
+run = "python 4/main.py"
+
+[tasks.run5]
+description = "Run the 5 application"
+alias = "5"
+run = "python 5/main.py"
+
+[tasks.lint]
+description = "Lint the code"
+run = "ruff ./"
