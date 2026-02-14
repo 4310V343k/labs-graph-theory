@@ -154,10 +154,7 @@ class CLI:
 
         vertex = int(self.prompt("Номер вершины: ", validator=self.int_validator))
         self.graph.remove_vertex(vertex)
-        print(
-            f"[bold green]✓[/bold green] Вершина {vertex} удалена, "
-            "сместив все последующие на -1"
-        )
+        print(f"[bold green]✓[/bold green] Вершина {vertex} удалена, сместив все последующие на -1")
 
     def cmd_remove_edge(self):
         """Удалить ребро"""
@@ -264,6 +261,7 @@ class CLI:
                 f"[bold]Расстояние:[/bold] {distance:.2f}",
                 title=f"Кратчайший путь от {start} до {end}",
                 border_style="green",
+                expand=False,
             )
         )
 
@@ -342,7 +340,7 @@ class CLI:
 [bold]Компонент связности:[/bold] {len(components)}
         """
 
-        print(Panel(info_text, title="Информация о графе", border_style="blue"))
+        print(Panel(info_text, title="Информация о графе", border_style="blue", expand=False))
 
     def prompt(self, message, *args, **kwargs):
         return prompt_toolkit.prompt(
