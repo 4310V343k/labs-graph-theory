@@ -122,7 +122,7 @@ class CLI:
         self.graph = Graph(Path(filepath), graph_type)
         print(
             f"[bold green]✓[/bold green] {graph_type.value.capitalize()} "
-            "граф загружен из файла {filepath}"
+            f"граф загружен из файла {filepath}"
         )
         self.execute("info")
 
