@@ -16,17 +16,17 @@ run = "uv pip install -r requirements.txt"
 [tasks.run3]
 description = "Run the 3 application"
 alias = "3"
-run = "python 3/main.py"
+run = "python -m lab3"
 
 [tasks.run4]
 description = "Run the 4 application"
 alias = "4"
-run = "python 4/main.py"
+run = "python -m lab4"
 
 [tasks.run5]
 description = "Run the 5 application"
 alias = "5"
-run = "python 5/main.py"
+run = "python -m lab5"
 
 [tasks.lint]
 description = "Lint the code"

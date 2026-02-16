@@ -1,4 +1,8 @@
 ## Три проекта по теории графов, каждый в своей папочке (но зависимости общие)
+
+В лабе на 3 старался держать код по задаче (класс, алгоритмы) максимально простым
+В лабе на 4 
+
 ### Запуск
 
 ```bash
@@ -7,7 +11,7 @@ mise run i
 
 # программы
 mise 3
-mise 4
+mise 4 -- [OPTIONS] COMMAND [ARGS]...
 mise 5
 ```
 
@@ -18,13 +22,13 @@ mise 5
 python3 -m venv .venv
 source .venv/bin/activate
 
-# зависимости
+# зависимости (работа с терминалом)
 pip install -r requirements.txt
 
 # запуск
-python3 3/main.py
-python3 4/main.py
-python3 5/main.py
+python3 -m lab3
+python3 -m lab4 [OPTIONS] COMMAND [ARGS]...
+python3 -m lab5
 ```
 
 ## На 3

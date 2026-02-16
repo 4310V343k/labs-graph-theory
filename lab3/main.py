@@ -4,8 +4,6 @@ from pathlib import Path
 from typing import Optional, TypeGuard
 
 import prompt_toolkit
-from graph import Graph, GraphOrientationType, dijkstra, dijkstra_all, prim
-from gui_helpers import FileNameValidator, FloatValidator, FuzzyFileCompletion, IntValidator
 from prompt_toolkit import PromptSession
 from prompt_toolkit.completion import WordCompleter
 from prompt_toolkit.formatted_text import HTML
@@ -13,6 +11,9 @@ from prompt_toolkit.styles import Style
 from rich import box, print
 from rich.panel import Panel
 from rich.table import Table
+
+from .graph import Graph, GraphOrientationType, dijkstra, dijkstra_all, prim
+from .gui_helpers import FileNameValidator, FloatValidator, FuzzyFileCompletion, IntValidator
 
 
 def check_graph_exists(graph: Graph | None) -> TypeGuard[Graph]:
