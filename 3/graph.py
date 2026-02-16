@@ -397,7 +397,7 @@ def prim(graph: Graph, start: int) -> list[tuple[int, int, float]]:
             if v == u:
                 continue
 
-            # у нам могут быть орграфы, а значит надо проходиться
+            # у нас могут быть орграфы, а значит надо проходиться
             # как по исходящим дугам, так и входящим (матрица смежности my beloved 💘)
             # если дуги идут друг в друга, берем меньший вес
             min_weight = min(graph.weight(v, u) or float("inf"), graph.weight(u, v) or float("inf"))
@@ -407,17 +407,14 @@ def prim(graph: Graph, start: int) -> list[tuple[int, int, float]]:
                 min_edge[u] = min_weight
                 heapq.heappush(queue, (min_weight, u))
 
-    # восстановление путей с конца в начало
-    result_paths = []
-    for end in range(n):
-        # восстановление путей с конца в начало
-        path = []
-        current = end
-        while current is not None:
-            path.append(current)
-            current = prev[current]
+    mst_edges: list[tuple[int, int, float]] = []
+    for v in range(n):
+        # вершины без prev недостижимы из start
+        # у стартовой вершины нет prev, но она и не нужна
+        u = prev[v]
+        if u is None:
+            continue
 
-        path.reverse()  # теперь с начала в конец
-        result_paths.append(path)
+        mst_edges.append((u, v, min_edge[v]))
 
-    return result_paths
+    return mst_edges
