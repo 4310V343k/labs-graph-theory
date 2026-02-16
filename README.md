@@ -80,27 +80,75 @@ python3 5/main.py
 3 4
 ```
 
-При наличии в файле одинаковых вершин используюется последняя, в остальном порядок вершин не важен 
+При наличии в файле одинаковых вершин используюется последняя, в остальном порядок вершин не важен
+
+<details>
+ <summary>Тестовые графы</summary>
+
+3/test_graphs/directed_shortest_paths.txt  
+![directed_shortest_paths.txt visualization](.github/assets/3/directed_shortest_paths.png)
+
+3/test_graphs/undirected_connected.txt  
+![undirected_connected.txt visualization](.github/assets/3/undirected_connected.png)
+
+3/test_graphs/undirected_disconnected.txt  
+![undirected_disconnected.txt visualization](.github/assets/3/undirected_disconnected.png)
+
+3/test_graphs/weighted_mst.txt  
+![weighted_mst.txt visualization](.github/assets/3/weighted_mst.png)
+
+> https://csacademy.com/app/graph_editor/
+
+</details>
+
+
 
 ### Создание графа из файла
 
 ```bash
 graph> load
-Путь к файлу: test_graph.txt
-Тип графа (directed/undirected) [undirected]: undirected
+load> Путь к файлу: 3/test_graphs/directed_shortest_paths.txt
+    > Тип графа:
+      1. неориентированный
+   >  2. ориентированный
+✓ Ориентированный граф загружен из файла 
+3/test_graphs/directed_shortest_paths.txt
+╭── Информация о графе ──╮
+│ Тип: Ориентированный   │
+│ Вершин: 5              │
+│ Рёбер: 7               │
+│ Связность: Да          │
+│ Компонент связности: 1 │
+╰────────────────────────╯
 ```
 
 ### Поиск кратчайшего пути
 
 ```bash
 graph> shortest_path
-Начальная вершина: 0
-Конечная вершина: 4
+shortest_path> Начальная вершина: 0
+shortest_path> Конечная вершина: 4
+╭─ Кратчайший путь от 0 до 4 ─╮
+│ Путь: 0 → 1 → 3 → 4         │
+│ Расстояние: 7.00            │
+╰─────────────────────────────╯
 ```
 
 ### Построение минимального остовного дерева
 
 ```bash
 graph> mst
-Начальная вершина [0]: 0
+mst> Начальная вершина: 0
+ Минимальное остовное 
+   дерево (алгоритм   
+        Прима)        
+╭───┬────┬────┬──────╮
+│ № │ От │ До │  Вес │
+├───┼────┼────┼──────┤
+│ 1 │ 0  │ 1  │ 2.00 │
+│ 2 │ 1  │ 2  │ 1.00 │
+│ 3 │ 2  │ 3  │ 1.00 │
+│ 4 │ 3  │ 4  │ 3.00 │
+╰───┴────┴────┴──────╯
+Общий вес МОД: 7.00
 ```

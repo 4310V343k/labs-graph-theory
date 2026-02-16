@@ -374,27 +374,29 @@ def prim(graph: Graph, start: int) -> list[tuple[int, int, float]]:
     n = graph.size()
 
     if not (0 <= start < n):
-        # а граф-то ПУСТОЙ
         return []
 
     min_edge: list[float] = [float("inf")] * n
     min_edge[start] = 0.0
     prev: list[int | None] = [None] * n
+    visited = [False] * n
+    mst_edges = []
 
     # приоритетная очередь (вес, вершина)
     queue = [(0.0, start)]
 
     while queue:
-        cur_weight, v = heapq.heappop(queue)
+        _, v = heapq.heappop(queue)
 
-        # если придя в эту вершину вес ребра, через которое мы пришли, больше, чем уже сохранено,
-        # то мы уже явно приходили в эту вершину ранее. и никаких булевых массивов!
-        # хорошо только на разреженных графах, иначе очередь может вырасти вплоть до n^2 (это плохо)
-        if cur_weight > min_edge[v]:
+        if visited[v]:
             continue
+        visited[v] = True
+
+        if prev[v] is not None:
+            mst_edges.append((prev[v], v, min_edge[v]))
 
         for u in range(n):
-            if v == u:
+            if v == u or visited[u]:
                 continue
 
             # у нас могут быть орграфы, а значит надо проходиться
@@ -402,19 +404,9 @@ def prim(graph: Graph, start: int) -> list[tuple[int, int, float]]:
             # если дуги идут друг в друга, берем меньший вес
             min_weight = min(graph.weight(v, u) or float("inf"), graph.weight(u, v) or float("inf"))
 
-            if min_weight != float("inf") and min_edge[u] > min_weight:
+            if min_weight < min_edge[u]:
                 prev[u] = v
                 min_edge[u] = min_weight
                 heapq.heappush(queue, (min_weight, u))
-
-    mst_edges: list[tuple[int, int, float]] = []
-    for v in range(n):
-        # вершины без prev недостижимы из start
-        # у стартовой вершины нет prev, но она и не нужна
-        u = prev[v]
-        if u is None:
-            continue
-
-        mst_edges.append((u, v, min_edge[v]))
 
     return mst_edges

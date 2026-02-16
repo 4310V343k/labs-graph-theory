@@ -326,19 +326,19 @@ class CLI:
         is_connected = self.graph.is_connected()
         components = self.graph.connected_components()
 
-        graph_type = (
-            "Ориентированный"
+        components_type_str = (
+            "слабой связности орграфа"
             if self.graph.graph_type == GraphOrientationType.DIRECTED
-            else "Неориентированный"
+            else "связности графа"
         )
 
         info_text = f"""
-[bold]Тип:[/bold] {graph_type}
+[bold]Тип:[/bold] {self.graph.graph_type.value}
 [bold]Вершин:[/bold] {size}
 [bold]Рёбер:[/bold] {len(edges)}
 [bold]Связность:[/bold] {"Да" if is_connected else "Нет"}
-[bold]Компонент связности:[/bold] {len(components)}
-        """
+[bold]Компонент {components_type_str}:[/bold] {len(components)}
+        """.strip()
 
         print(Panel(info_text, title="Информация о графе", border_style="blue", expand=False))
 
