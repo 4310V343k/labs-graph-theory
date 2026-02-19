@@ -98,7 +98,7 @@ def a_star(grid: Grid, start: Coord, goal: Coord, heuristic: HeuristicFunc) -> P
     # найденный путь в обратном порядке
     path: list[Coord] = []
     cur = goal
-    while cur:
+    while cur != start:
         path.append(cur)
         cur = prev[cur]
 
