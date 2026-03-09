@@ -21,7 +21,9 @@ class FlowEdge:
 # в задании указано "соответствующую версию алгоритма"
 # непонятно, что означает "соответствующая", поэтому реализовал метод Форда–Фалкерсона
 # поиском в ширину (алгоритм Эдмондса-Карпа)
-def edmonds_karp(n: int, edges: list[WeightedEdge], source: int, sink: int) -> tuple[float, list[FlowEdge]]:
+def edmonds_karp(
+    n: int, edges: list[WeightedEdge], source: int, sink: int
+) -> tuple[float, list[FlowEdge]]:
     """Вычисляет максимальный поток и потоки по рёбрам (в порядке ввода)."""
     if n <= 0 or not (0 <= source < n) or not (0 <= sink < n):
         return 0.0, []
@@ -38,14 +40,14 @@ def edmonds_karp(n: int, edges: list[WeightedEdge], source: int, sink: int) -> t
     for e in edges:
         v, u, cap = e
         # len тут указывает на индекс *нового* ребра
-        forward_edge = FlowEdge(v, len(graph[v]), cap)
-        backward_edge = FlowEdge(u, len(graph[u]), 0.0)
+        forward_edge = FlowEdge(u, len(graph[u]), cap)
+        backward_edge = FlowEdge(v, len(graph[v]), 0.0)
 
         graph[v].append(forward_edge)
         graph[u].append(backward_edge)
 
         # дополнительно сохраняем только передние ребра в порядке ввода,
-        # чтобы потом отчитаться по ним
+        # чтобы потом отчитаться по ним в порядке ввода
         forward_edges.append(forward_edge)
 
     max_flow = 0.0
